@@ -1,0 +1,54 @@
+{
+    "name": "kineticamobile/laravel-sms-auth",
+    "description": "Login in Laravel via SMS code through Ubicual.com",
+    "keywords": [
+        "laravel",
+        "auth",
+        "login",
+        "sms"
+    ],
+    "homepage": "https://github.com/kineticamobile/laravel-sms-auth",
+    "authors": [
+    {
+        "name": "Daniel Macías Ramos",
+        "email": "danielmaciasramos@gmail.com",
+        "homepage": "https://github.com/dmaciasr",
+        "role": "Developer"
+    }
+    ],
+    "license": "MIT",
+    "require": {
+        "php" : "^7.4 || ^8.0",
+        "illuminate/auth": "^6.0|^8.0|^9.0",
+        "illuminate/container": "^6.0|^8.0|^9.0",
+        "illuminate/contracts": "^6.0|^8.0|^9.0",
+        "illuminate/database": "^6.0|^8.0|^9.0",
+        "laravel/serializable-closure": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kineticamobile\\SmsAuth\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SmsAuth\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Kineticamobile\\SmsAuth\\SmsAuthServiceProvider"
+            ]
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0|^6.0|^7.0",
+        "phpunit/phpunit": "^7.0|^9.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
