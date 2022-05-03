@@ -21,6 +21,9 @@ class SmsAuthController extends Controller
         if(session()->has('sms_auth_user')) {
             session()->forget('sms_auth_user');
         }
+        if (Auth::check()) {
+            return redirect(config('sms-auth.redirect_route', '/'));
+        }
         
         return view('sms-auth::sms_auth');
     }
