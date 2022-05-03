@@ -23,16 +23,18 @@ return [
 
     /*
         |--------------------------------------------------------------------------
-        | Path default to redirect
+        | Routes
         |--------------------------------------------------------------------------
         |
-        | Here you may specify the name of the path you'd like to use so that
-        | the redirect when verify correct token.
         |
         */
-    'sms_login_route' => 'smsauth',
+    'sms_auth_route' => 'sms_auth',
 
-    'redirect_default' => '/',
+    'sms_login_route' => 'sms_login',
+
+    'sms_verify_route' => 'sms_verify',
+
+    'redirect_route' => '/',
 
     /*
         |--------------------------------------------------------------------------
