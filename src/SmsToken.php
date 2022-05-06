@@ -24,9 +24,7 @@ class SmsToken extends Model
 
     protected static function getTokenLength()
     {
-        return config('sms-auth.token.length', 8) <= 255
-            ? config('sms-auth.token.length', 8)
-            : 8;
+        return config('sms-auth.token_length', 8);
     }
 
     /**
@@ -123,7 +121,6 @@ class SmsToken extends Model
         }
         $text = str_replace("%s", strval($this->token),config('sms-auth.sms_text', 'Código de acceso: %s'));
         $response = Http::get('https://api.ubicual.com/api/v2/sms/send?to=' . $this->user->phone . '&from='.config('sms-auth.sender').'&text=' . urlencode($text) . '&api_token=' . config('sms-auth.ubicual_token'));
-        // $response = Http::get('http://ubapi.test/api/v2/sms/send?to=' . $this->user->phone . '&from='.config('sms-auth.sender').'&text=' . urlencode($text) . '&api_token=' . config('sms-auth.ubicual_token'));
 
 
         Event::dispatch(new SmsTokenWasSent($this));

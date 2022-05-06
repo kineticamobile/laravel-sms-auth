@@ -39,9 +39,9 @@ class SmsAuthController extends Controller
 
 
         if(!SmsToken::checkUserAvailableTokens($user->id)>0){
-            $sms_token=SmsToken::create($user->id,config('sms-auth.lifetime',60));
+            $sms_token=SmsToken::create($user->id,config('sms-auth.token_lifetime',60));
         }else{
-            return redirect()->back()->withErrors(['Debe esperar al menos '.config('sms-auth.lifetime',60).' minuto/s para solicitar otro código']);
+            return redirect()->back()->withErrors(['Debe esperar al menos '.config('sms-auth.token_lifetime',60).' minuto/s para solicitar otro código']);
         }
         try {
             $response=$sms_token->send();
