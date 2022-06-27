@@ -48,11 +48,11 @@ class SmsAuthController extends Controller
             if(is_bool($response) && $response == true){
                 return view('sms-auth::sms_verify');
             }else{
-                return redirect()->back()->withErrors([$response]);
+                return redirect()->back()->withErrors(['error' => config('sms-auth.send_error','Se ha producido un error al enviar el código. Contacte con el administrador')]);
             }
         } catch (\Throwable $th) {
             Log::error("message: ".$th->getMessage()."\n".$th->getTraceAsString());
-            return redirect()->back()->withErrors([ 'Se ha producido un error al enviar el código. Contacte con el administrador']);
+            return redirect()->back()->withErrors(['error' => config('sms-auth.send_error','Se ha producido un error al enviar el código. Contacte con el administrador')]);
         }
     }
 
@@ -69,6 +69,6 @@ class SmsAuthController extends Controller
                 return redirect(config('sms-auth.redirect_route', '/'));
             }
         }
-        return redirect()->back()->withErrors(['error' => 'Invalid token']);
+        return view('sms-auth::sms_verify')->withErrors(['error' => 'Invalid token']);
     }
 }

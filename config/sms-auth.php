@@ -78,6 +78,11 @@ return [
 
     'sender' => env('SMS_SENDER', 'REMITENTE'),
 
+    //Añadir dominino de envio de sms desde env APP_URL
     'sms_text' => 'Código de acceso: %s',
+
+    'invalid_message' => 'Código incorrecto',
+
+    'send_error' => 'Se ha producido un error al enviar el código. Contacte con el administrador'
 
 ];

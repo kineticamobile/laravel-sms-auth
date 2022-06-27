@@ -11,7 +11,7 @@
                 <label for="phone" class="col-12 col-form-label text-muted">{{ __('TELEFONO') }}</label>
 
                 <div class="col-12">
-                    <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
+                    <input id="phone" type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="tel" autofocus>
 
                     @error('phone')
                         <span class="invalid-feedback" role="alert">

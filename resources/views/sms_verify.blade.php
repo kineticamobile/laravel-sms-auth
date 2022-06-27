@@ -10,7 +10,7 @@
             <label for="token" class="col-md-4 col-form-label text-md-end text-muted">{{ __('Código') }}</label>
 
             <div class="col-md-6">
-                <input id="token" type="text" class="form-control @error('token') is-invalid @enderror" name="token" value="{{ old('token') }}" required autofocus>
+                <input id="token" type="text" class="form-control @error('token') is-invalid @enderror" maxlength="{{config('sms-auth.token_length',8)}}" name="token" value="{{ old('token') }}" required autofocus>
 
                 @error('token')
                     <span class="invalid-feedback" role="alert">

@@ -121,10 +121,11 @@ class SmsToken extends Model
         }
         $text = str_replace("%s", strval($this->token),config('sms-auth.sms_text', 'Código de acceso: %s'));
         $response = Http::get('https://api.ubicual.com/api/v2/sms/send?to=' . $this->user->phone . '&from='.config('sms-auth.sender').'&text=' . urlencode($text) . '&api_token=' . config('sms-auth.ubicual_token'));
-
-
-        Event::dispatch(new SmsTokenWasSent($this));
-
-        return true;
+        if($response->successful()){
+            Event::dispatch(new SmsTokenWasSent($this));
+            return true;
+        }else{
+            return false;
+        }
     }
 }
