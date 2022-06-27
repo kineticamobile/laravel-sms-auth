@@ -69,6 +69,6 @@ class SmsAuthController extends Controller
                 return redirect(config('sms-auth.redirect_route', '/'));
             }
         }
-        return view('sms-auth::sms_verify')->withErrors(['error' => 'Invalid token']);
+        return view('sms-auth::sms_verify')->withErrors(['error' => config('sms-auth.invalid_message','Código incorrecto')]);
     }
 }
