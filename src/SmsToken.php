@@ -37,7 +37,7 @@ class SmsToken extends Model
 
         $smstoken = new static();
         $smstoken->user_id = $user_id;
-        $smstoken->token = rand(pow(10, self::getTokenLength() - 1), pow(10, self::getTokenLength()) - 1);
+        $smstoken->token = random_int(pow(10, self::getTokenLength() - 1), pow(10, self::getTokenLength()) - 1);
         $smstoken->available_at = $lifetime
             ? Carbon::now()->addMinutes($lifetime)
             : null;
@@ -120,7 +120,7 @@ class SmsToken extends Model
             return 'No se ha configurado el token de Ubicual';
         }
         $text = str_replace("%s", strval($this->token),config('sms-auth.sms_text', 'Código de acceso: %s'));
-        $response = Http::get('https://api.ubicual.com/api/v2/sms/send?to=' . $this->user->phone . '&from='.config('sms-auth.sender').'&text=' . urlencode($text) . '&api_token=' . config('sms-auth.ubicual_token'));
+        $response = Http::get('https://api.ubicual.com/api/v2/sms/send?to=' . $this->user->{config('sms-auth.username', 'phone')} . '&from='.config('sms-auth.sender').'&text=' . urlencode($text) . '&api_token=' . config('sms-auth.ubicual_token'));
         if($response->successful()){
             Event::dispatch(new SmsTokenWasSent($this));
             return true;

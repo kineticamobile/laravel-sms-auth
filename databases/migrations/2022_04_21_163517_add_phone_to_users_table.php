@@ -15,7 +15,7 @@ class AddPhoneToUsersTable extends Migration
     {
         if (!Schema::hasColumn('users', config('sms-auth.username', 'phone'))) {
             Schema::table('users', function (Blueprint $table) {
-                $table->string('phone')->nullable();
+                $table->string(config('sms-auth.username', 'phone'))->nullable();
             });
         }
     }

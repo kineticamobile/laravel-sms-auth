@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Kineticamobile\SmsAuth\Middlewares\SmsAuthMiddleware;
+use Illuminate\Routing\Middleware\ThrottleRequests;
 
 Route::group(
     [
@@ -12,6 +12,8 @@ Route::group(
 
         Route::post(config('sms-auth.sms_login_route', 'sms_login'),'Kineticamobile\SmsAuth\Controllers\SmsAuthController@sms_login')->name('sms_login');
 
-        Route::post(config('sms-auth.sms_verify_route', 'sms_verify'),'Kineticamobile\SmsAuth\Controllers\SmsAuthController@sms_verify')->name('sms_verify');
+        Route::post(config('sms-auth.sms_verify_route', 'sms_verify'),'Kineticamobile\SmsAuth\Controllers\SmsAuthController@sms_verify')->name('sms_verify')
+            // shortcut: limits by IP, not per user; a distributed attacker gets 5/min per IP
+            ->middleware(ThrottleRequests::class.':5,1');
     }
 );
